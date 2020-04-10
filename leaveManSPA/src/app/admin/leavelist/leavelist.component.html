@@ -60,19 +60,18 @@
                 <input type="text"  placeholder="Employee Name" class="form-control"/>
             </div> -->
             <div class="form-group mr-3">
-                <select class="form-control form-control-sm" id="action">
-                    <option>Select Action</option>
-                    <option>Approve</option>
-                    <option>Reject</option>
+                <select class="form-control form-control-sm" id="action" (change)="decision1($event.target.value)">
+                    <option value="0" default>Leave Type</option>
+                    <option *ngFor='let leave of leaveList' value={{leave.name}}>{{leave.name}}</option>
+                    <!-- <option>Approve</option>
+                    <option>Reject</option> -->
                 
                 </select>
             </div>
             <div class="form-group mr-3">
-                <select class="form-control form-control-sm" id="action">
-                    <option>Select Action</option>
-                    <option>Approve</option>
-                    <option>Reject</option>
-                
+                <select class="form-control form-control-sm" id="action"  (change)="decision2($event.target.value)">
+                    <option value="0">Employee Name</option>
+                    <option *ngFor='let emp of employeelist' value={{emp.id}}>{{emp.name}}</option>
                 </select>
             </div>
             <button type="button" class="btn btn-outline-dark form-control-sm">Search</button>
@@ -122,7 +121,7 @@
                             
                             <th *ngIf="emp.id === employeeleave.employeeId">
                                 <div class="form-group">
-                                    <select class="form-control form-control-sm" id="action" (change)="decision(employeeleave,$event.target.value)" name="action">
+                                    <select class="form-control form-control-sm" id="action" (change)="decision3(employeeleave,$event.target.value)" name="action">
                                         <option >Select Action</option>
                                         <option value="Approve">Approve</option>
                                         <option value="Reject">Reject</option>

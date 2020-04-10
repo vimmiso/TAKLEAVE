@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { IEmployee } from '../models/iemployee';
 import { EmployeeserviceService } from '../services/employeeservice.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { IEmployee2, EmployeeResolved } from '../models/IEmployee2';
 
 @Component({
   selector: 'app-admin',
@@ -37,6 +38,7 @@ export class AdminComponent implements OnInit {
 filteredEmployees:IEmployee[];
 employeelist:IEmployee[] = [];
 public employeelist2:IEmployee[] = [];
+employeelist3:IEmployee2[]=[];
 //  emp:IEmployee={""}
  errorMessage:string;
  e:IEmployee;
@@ -73,9 +75,18 @@ public employeelist2:IEmployee[] = [];
   // }
 
 
-  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private router: Router) { }
+  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
+
+
+    this.route.data.subscribe(data => {
+      const resolvedData: EmployeeResolved = data['resolvedData'];
+      this.errorMessage = resolvedData.error;
+      this.onEmployeeRetrieved(resolvedData.eemployeelist);
+    })
+
+
     this.employeeService.getemployees().subscribe(
       employees => {
         this.employeelist = employees;
@@ -84,4 +95,9 @@ public employeelist2:IEmployee[] = [];
       error => this.errorMessage = <any>error
     );
   }
+
+  onEmployeeRetrieved(emp:IEmployee2[]):void{
+    this.employeelist3 = emp;
+   }
+
 }

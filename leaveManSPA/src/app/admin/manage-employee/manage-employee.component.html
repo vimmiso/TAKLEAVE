@@ -58,7 +58,7 @@
         <h6>Search by Name:</h6>
       </div>
       <div class="col-md-4">
-        <input type="text" placeholder="Employee Name" class="form-control" />
+        <input type="text" placeholder="Employee Name" class="form-control" [(ngModel)]="listFilter" (input)="Search()" />
       </div>
       <button type="button" class="btn btn-outline-dark">Search</button>
       <div class="btn-group float-right" style="position: absolute; margin-left: 88%;">
@@ -90,13 +90,14 @@
         </thead>
         <tbody>
           <tr *ngFor='let emp of employeelist2'>
+            <td>
+                {{emp.name}}
+            </td>
+            <td>{{emp.email}}</td>
+            <td>{{emp.doj}}</td>
+            <td>{{emp.dob}}</td>
 
-            <th>{{emp.name}}</th>
-            <th>{{emp.email}}</th>
-            <th>{{emp.doj}}</th>
-            <th>{{emp.dob}}</th>
-
-            <th>
+            <td>
               <a [routerLink]="['/manageemp',empId,'edit',emp.id]">
                 <button class="btn mr-3">
                   <img src="/assets/edit.png" alt="">
@@ -105,7 +106,7 @@
               <button class="btn" (click)="delete(emp.id)">
                 <img src="/assets/delete.png" alt="">
               </button>
-            </th>
+            </td>
 
 
           </tr>

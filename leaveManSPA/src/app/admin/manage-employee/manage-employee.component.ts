@@ -20,16 +20,13 @@ export class ManageEmployeeComponent implements OnInit {
  employee:IEmployee;
  employeelist2:IEmployee2[]=[];
  filteredEmployee:IEmployee = {Name:"",Id:0,DOB:"",DOJ:"",Salary:0,Email:"",Role:"",TotalLeave:""};
-//  errorMessage:string;
- 
+ listFilter:string="";
  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private route:ActivatedRoute,private router:Router) { 
-  // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
  }
 
  empId = Number(this.route.snapshot.paramMap.get('id'));
 
  ngOnInit(): void {
-
 
 
   this.route.data.subscribe(data => {
@@ -75,6 +72,19 @@ export class ManageEmployeeComponent implements OnInit {
 
  }
 
+ Search(){
+   if(this.listFilter !== ""){
+    this.employeelist2 = this.employeelist2.filter(res=>{
+      console.log(res);
+      if(res.name !== null){
+        return res.name.toString().toLowerCase().match(this.listFilter.toString().toLowerCase());
+      }
+    });
+  }else if(this.listFilter === ""){
+    this.ngOnInit();
+  }
+ }
+
  delete(id:number){
    this.employeeService.deleteEmp(id).subscribe(
     (error: any) => this.errorMessage = <any>error
@@ -93,7 +103,7 @@ export class ManageEmployeeComponent implements OnInit {
 
 
  onGetId():void{
-  
+  this.ngOnInit();
   this.route.paramMap.subscribe(
     params => {
       this.empId = +params.get('id');
@@ -114,7 +124,6 @@ export class ManageEmployeeComponent implements OnInit {
   }else{
     this.header=false;
   }
-  // this.reloadComponent();
  }
 
 

@@ -14,7 +14,7 @@ export class EmployeeResolverService implements Resolve<EmployeeResolved> {
 
   resolve(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):Observable<EmployeeResolved>{
     const id = route.paramMap.get('id');
-    if(isNaN(+id) || (+id)<=0){
+    if(id!=null && (isNaN(+id) || (+id)<=0)){
       const message = `Product id was not a number`;
       console.error(message);
       return of({eemployeelist:null, error:message});

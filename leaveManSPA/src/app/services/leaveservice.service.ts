@@ -21,6 +21,13 @@ export class LeaveserviceService {
     );
   }
 
+  getleaves2():Observable<Ileave2[]> {
+    return this.http.get<Ileave2[]>(this.leaveUrl).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
   getlea(id: number): Observable<Ileave> {
     const url = `${this.leaveUrl}/${id}`;
     return this.http.get<Ileave>(url).pipe(
