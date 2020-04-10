@@ -18,18 +18,19 @@
               aria-label="Email" aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               [(ngModel)]="Employee.Email" required #emailField="ngModel"
               [class.field-error]="form.submitted && emailField.invalid">
-            
+
           </div>
 
           <div *ngFor='let employee of employeelist3'>
             <div *ngIf="(employee.email === Employee.Email)">
               <div *ngIf="(employee.role ==='admin') || (employee.role==='Admin')">
                 <a [routerLink]="['/manageemp',employee.id]">
-                  <button type="submit" class="btn btn-secondary btn-block" (submit)="onSubmit()" name="che">Submit</button>
+                  <button type="submit" class="btn btn-secondary btn-block" (submit)="onSubmit()"
+                    name="che">Submit</button>
                 </a>
               </div>
             </div>
-           
+
           </div>
         </div>
       </div>
@@ -45,6 +46,6 @@
     </div>
   </div>
   <div class="footer">
-  <p>Note: If you are not eligible then Submit button will not appear.</p>
-</div>
+    <p>Note: If you are not eligible then Submit button will not appear.</p>
+  </div>
 </form>
