@@ -16,14 +16,14 @@ export class LeaveserviceService {
 
   getleaves():Observable<Ileave[]> {
     return this.http.get<Ileave[]>(this.leaveUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
 
   getleaves2():Observable<Ileave2[]> {
     return this.http.get<Ileave2[]>(this.leaveUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -31,7 +31,7 @@ export class LeaveserviceService {
   getlea(id: number): Observable<Ileave> {
     const url = `${this.leaveUrl}/${id}`;
     return this.http.get<Ileave>(url).pipe(
-      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -39,7 +39,7 @@ export class LeaveserviceService {
   getlea2(id: number): Observable<Ileave2> {
     const url = `${this.leaveUrl}/${id}`;
     return this.http.get<Ileave2>(url).pipe(
-      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -50,7 +50,7 @@ export class LeaveserviceService {
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(data => console.log('We got it: ', + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -62,7 +62,7 @@ export class LeaveserviceService {
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(() => console.log('We got it: ', + emp.id)),
+      tap(() => ( emp.id)),
       map(()=> emp),
       catchError(this.handleError)
     );

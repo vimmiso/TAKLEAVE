@@ -17,13 +17,13 @@ export class EmployeeserviceService {
 
   getemployees(): Observable<IEmployee[]> {
     return this.http.get<IEmployee[]>(this.employeeUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError )
     );
   }
   getemployees2(): Observable<IEmployee2[]> {
     return this.http.get<IEmployee2[]>(this.employeeUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError )
     );
   }
@@ -31,7 +31,7 @@ export class EmployeeserviceService {
   getemp(id: number): Observable<IEmployee> {
     const url = `${this.employeeUrl}/${id}`;
     return this.http.get<IEmployee>(url).pipe(
-      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -39,7 +39,7 @@ export class EmployeeserviceService {
   getemp2(id: number): Observable<IEmployee2> {
     const url = `${this.employeeUrl}/${id}`;
     return this.http.get<IEmployee2>(url).pipe(
-      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -50,7 +50,7 @@ export class EmployeeserviceService {
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(data => console.log('We got it: ', + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -61,7 +61,7 @@ export class EmployeeserviceService {
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(data => console.log('We got it: ', + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -73,7 +73,7 @@ export class EmployeeserviceService {
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(() => console.log('We got it: ', + emp.id)),
+      tap(() => (emp.id)),
       map(()=> emp),
       catchError(this.handleError)
     );

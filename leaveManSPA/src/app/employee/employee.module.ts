@@ -8,6 +8,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeedetailsComponent } from './employeedetails/employeedetails.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     HttpClientModule,
     BrowserModule,
+    BsDatepickerModule.forRoot(),
     SharedModule,
     EmployeeRouting
     

@@ -19,14 +19,11 @@ export class HeaderComponent implements OnInit {
   errorMessage:string;
 
   ngOnInit(): void {
-    // this.empId = (this.route.snapshot.paramMap.get('id'));
     this.route.paramMap.subscribe(
       params => {
         this.empId = +params.get('id');
-        console.log(this.empId);
       }
     );
-    console.log(this.empId);
     if(this.empId){
       this.header=true;
       this.employeeService.getemp(this.empId).subscribe(

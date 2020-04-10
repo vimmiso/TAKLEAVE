@@ -15,7 +15,7 @@ export class EmployeeleaveserviceService {
 
   getemployeeleavemaps():Observable<Iemployeeleave[]> {
     return this.http.get<Iemployeeleave[]>(this.employeeUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      tap(data => JSON.stringify(data)),
       catchError(this.handleError)
     );
   }
@@ -27,7 +27,7 @@ export class EmployeeleaveserviceService {
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(() => console.log('We got it: ', + emp.id)),
+      tap(() => ( emp.id)),
       map(()=> emp),
       catchError(this.handleError)
     );

@@ -13,36 +13,13 @@ import { IEmployee2, EmployeeResolved } from '../models/IEmployee2';
 })
 export class AdminComponent implements OnInit {
 
- 
- 
-  // SaveFormData(formData: NgForm){
-  //   const Employee = {
-  //     Name: 'Name',
-  //     Email: 'Email@gmail.com',
-  //     DOB: '1-1-1996',
-  //     DOJ: '1-1-2019',
-  //     Salary: 400000,
-  //     Role: 'employee',
-  //     TotalLeave: '12'
-  //     // Password: this.password
-  //   };
-  //   this.httpClient.post('http://localhost:5000/api/employee',Employee)
-  //   .subscribe((response)=>{
-  //     console.log(response);
-  //   });
-
-  //   formData.resetForm();
-  // }
-
-  
+ch:boolean=true;  
 filteredEmployees:IEmployee[];
 employeelist:IEmployee[] = [];
 public employeelist2:IEmployee[] = [];
 employeelist3:IEmployee2[]=[];
-//  emp:IEmployee={""}
  errorMessage:string;
  e:IEmployee;
-  // name;
   
      Employee = {
       Name:"",
@@ -54,27 +31,6 @@ employeelist3:IEmployee2[]=[];
       TotalLeave: ""
     }
  
-
-  // SaveFormData(formData: NgForm){
-  //   const Employee = {
-  //     Name: this.name,
-  //     Email: this.email,
-  //     DOB: '1-1-1996',
-  //     DOJ: '1-1-2019',
-  //     Salary: 400000,
-  //     Role: 'employee',
-  //     TotalLeave: '12'
-  //     // Password: this.password
-  //   };
-  //   this.http.post('http://localhost:5000/api/employee',Employee)
-  //   .subscribe((response)=>{
-  //     console.log(response);
-  //   });
-
-  //   formData.resetForm();
-  // }
-
-
   constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
@@ -98,6 +54,10 @@ employeelist3:IEmployee2[]=[];
 
   onEmployeeRetrieved(emp:IEmployee2[]):void{
     this.employeelist3 = emp;
+   }
+
+   onSubmit(){
+     this.ch=false;
    }
 
 }

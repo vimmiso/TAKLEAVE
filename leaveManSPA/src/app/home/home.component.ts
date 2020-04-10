@@ -23,10 +23,8 @@ export class HomeComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.empId = +params.get('id');
-        console.log(this.empId);
       }
     );
-    console.log(this.empId);
     if(this.empId){
       this.header=true;
       this.employeeService.getemp(this.empId).subscribe(
