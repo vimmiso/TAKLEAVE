@@ -1,0 +1,67 @@
+<form #form="ngForm" id="form"  style="margin-top: 2%; border-radius: 30px;height: 650px; width: 80%; margin-left: 10%; background-position: center;">
+    <div class="w-100 container"  >
+      <div class="row">
+        <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <h1 class="text-center mt-3">Admin Login</h1>
+            <div class="container my-sm-5">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">    <img src="./assets/user.png" width="25" height="25" class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
+                  </span>
+                </div>
+                <input type="email" class="form-control" name="email" placeholder="To proceed please enter valid Email..." aria-label="Email" 
+                aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="Employee.Email" required #emailField="ngModel"
+                [class.field-error]="form.submitted && emailField.invalid">
+                </div>
+                <!-- <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" [(ngModel)]="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                </div> -->
+                <!-- <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" [(ngModel)]="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div> -->
+                <div *ngFor='let employee of employeelist'>
+                  <div *ngIf='employee.email === Employee.Email'>
+                    <a [routerLink]="['/manageemp',employee.id]">
+                    <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+                    </a>
+                  </div>
+  
+                </div>
+                <!-- <button type="submit" class="btn btn-secondary btn-block">Submit</button> -->
+              </div>
+          </div>
+          <div class="col-md-3"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <div [hidden]="!form.submitted || emailField.valid" class="alert alert-danger" data-placement="top">
+          Enter the valid email
+        </div>
+      </div>
+       
+  
+      </div>
+    
+    </div>
+      <!-- <div class="form-group">
+          <label for="exampleInputName">Name</label>
+          <input type="text" [(ngModel)]="name" name="name" class="form-control" id="exampleInputName" aria-describedby="namelHelp" placeholder="Enter name">
+      </div>
+      <div class="form-group">
+      <div class="input-group mb-3">
+       
+        <label for="exampleInputName">Name</label>
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">@</span>
+        </div>
+        
+        <input type="text" [(ngModel)]="name" name="name" class="form-control" id="exampleInputName" aria-describedby="namelHelp" placeholder="Enter name">
+      </div>
+    </div> -->
+   
+    </form>
+    

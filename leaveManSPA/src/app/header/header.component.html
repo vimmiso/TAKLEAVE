@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="./assets/071.jpg" style="margin-top: 6%;" width="30" height="30"
+      class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
+    <b style="font-size: 32px;">TakLeave</b>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <ul class="nav nav-tabs ml-auto border-dark">
+    <li *ngIf="!header" class="nav-item ">
+      <a class="nav-link" routerLink="/home" routerLinkActive="active"> <b>Home</b> </a>
+    </li>
+    <li *ngIf="header" class="nav-item ">
+      <a class="nav-link" ><b>Welcome {{employee.Name}}</b></a>
+    </li>
+    <li *ngIf="!header" class="nav-item">
+      <a class="nav-link" routerLink="/admins" routerLinkActive="active"><b>Admin login</b></a>
+    </li>
+    <li *ngIf="!header" class="nav-item ">
+      <a class="nav-link" routerLink="/employees" routerLinkActive="active"><b>Employee login</b></a>
+    </li>
+    <li *ngIf="header" class="nav-item ">
+      <a class="nav-link"><b>Log out</b></a>
+    </li>
+  </ul>
+</nav>

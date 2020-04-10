@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="./assets/071.jpg" style="margin-top: 6%;" width="30" height="30"
+      class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
+    <b style="font-size: 32px;">TakLeave</b>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <ul class="nav nav-tabs ml-auto border-dark">
+    <li *ngIf="!header" class="nav-item ">
+      <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"> <b>Home</b> </a>
+    </li>
+    <li *ngIf="header" class="nav-item ">
+      <a class="nav-link"><b>Welcome</b></a>
+    </li>
+    <li *ngIf="!header" class="nav-item">
+      <a class="nav-link" [routerLink]="['/admins']" routerLinkActive="active"><b>Admin login</b></a>
+    </li>
+    <li *ngIf="!header" class="nav-item ">
+      <a class="nav-link" [routerLink]="['/employees']" routerLinkActive="active"><b>Employee login</b></a>
+    </li>
+    <li *ngIf="header" class="nav-item ">
+      <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"><b>Log out</b></a>
+    </li>
+  </ul>
+</nav>
+<form>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>
+          <a [routerLink]="['/manageemp',empId]">
+            <button type="submit" (click)="onGetId()"
+              class="btn btn-success mr-3 shadow rounded border border-dark">Employee</button>
+          </a>
+          <a [routerLink]="['/leaveconfig',empId]">
+            <button type="submit" (click)="onGetId()" class="btn btn-success mr-3">Leave Configuration</button>
+          </a>
+          <a [routerLink]="['/leavelist',empId]">
+            <button type="submit" (click)="onGetId()" class="btn btn-success mr-3">Leave List</button>
+          </a>
+        </th>
+      </thead>
+    </table>
+  </div>
+</form>
+
+
+<div class="col-md-12" style="text-align: center;">
+
+  <h4>Add Employee</h4>
+  <!-- <span class=" col-md-6">
+        <button type="button" class="btn btn-outline-dark">Search</button>
+
+    </span> -->
+</div>
+<form (ngSubmit)="onSubmit(formData)" #formData="ngForm" style="margin-left: 35%;margin-top: 5%;">
+
+  <div class="form-group row">
+    <label for="Name" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="Name" value="Name" [(ngModel)]="name" name="Name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="Email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-6">
+      <input type="Email" class="form-control" id="Email" placeholder="Email" [(ngModel)]="email" name="Email">
+    </div>
+  </div>
+  <div class="form-group row">
+
+    <!-- <div class="col-xs-4 mr-3"> -->
+      <label for="leave" class="col-sm-2 col-form-label"> Date of Joining </label>
+    <!-- </div> -->
+    <div class="col-sm-6">
+      <input type="text" placeholder="Select date" class="form-control" [(ngModel)]="doj" name="doj"
+        bsDatepicker>
+    </div>
+  </div>
+  <div class="form-group row">
+
+    <!-- <div class="col-xs-4 mr-3"> -->
+      <label for="leave" class="col-sm-2 col-form-label"> Date of Birth </label>
+    <!-- </div> -->
+    <div class="col-sm-6">
+      <input type="text" placeholder="Select date" [(ngModel)]="dob" name="dob" class="form-control"
+        bsDatepicker>
+    </div>
+  </div>
+
+  <div class=" col-md-8" style="margin-left: 0%;">
+
+    <button type="submit" class="btn btn-primary" style="float: right; width: 120px;">Save</button>
+
+    <button type="button " (click)="onGetId()" class="btn btn-secondary" style="float: left;width: 100px;"
+      [routerLink]="['/manageemp',empId]">Back</button>
+
+  </div>
+</form>

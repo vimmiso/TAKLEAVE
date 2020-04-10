@@ -1,0 +1,16 @@
+.container{
+    /* Full height */
+    background-image: url(/assets/office.jpg);
+    height: 650px;
+    width: 100%;
+    
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  /* .if{
+      background-color: red;
+  } */
+  

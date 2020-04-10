@@ -1,0 +1,17 @@
+
+#form{
+    background-color: rgb(241, 235, 235);;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+h1{
+    font-size: 50px;
+    color: black;
+}
+
+.field-error{
+    border:1px solid red;
+}
