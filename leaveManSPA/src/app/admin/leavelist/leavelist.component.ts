@@ -20,32 +20,31 @@ export class LeavelistComponent implements OnInit {
   filteredEmployeeLeaves: Iemployeeleave[];
   employeeLeavelist: Iemployeeleave[] = [];
   employeeLeavelist2: Iemployeeleave[] = [];
-  leaveList:Ileave2[]=[];
+  leaveList: Ileave2[] = [];
   errorMessage: string;
   empId;
   header: boolean = false;
   employee: IEmployee;
-  e: Iemployeeleave={
-    id:0,
-    employeeId:0,
-    leaveId:0,
-    startDate:"",
-    endDate:"",
-    status:"Pending",
-    leaveType:"",
-    noofDays:0
+  e: Iemployeeleave = {
+    id: 0,
+    employeeId: 0,
+    leaveId: 0,
+    startDate: "",
+    endDate: "",
+    status: "Pending",
+    leaveType: "",
+    noofDays: 0
   };
   filteredEmployee: IEmployee;
   action1: string = this.e.status;
   action2: string = this.e.status;
   action3: string = this.e.status;
- 
+
   action: string = "Select Action";
-  //  errorMessage:string;
 
 
 
-  constructor(private http: HttpClient, private employeeService: EmployeeserviceService, private employeeLeaveService: EmployeeleaveserviceService,private leaveService:LeaveserviceService ,private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private employeeService: EmployeeserviceService, private employeeLeaveService: EmployeeleaveserviceService, private leaveService: LeaveserviceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.employeeService.getemployees().subscribe(
@@ -75,15 +74,12 @@ export class LeavelistComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.empId = +params.get('id');
-        console.log(this.empId);
       }
     );
-    console.log(this.empId);
     if (this.empId) {
       this.header = true;
       this.employeeService.getemp(this.empId).subscribe(
         employee => {
-          console.log(employee);
           this.employee = employee;
           this.filteredEmployee = this.employee;
         },
@@ -95,50 +91,40 @@ export class LeavelistComponent implements OnInit {
 
   }
 
-  
 
-  decision1(de:string){
-    if(de !== "0"){
-      // var totalWords = "my name is rahul.";
-      de = de.replace(/ .*/,'');
-      alert(de);
-      console.log(de);
-      
-      this.employeeLeavelist = this.filteredEmployeeLeaves.filter( res=>{
-        const l:string = ""+res.leaveType;
-        console.log(de +" "+l);
+
+  decision1(de: string) {
+    if (de !== "0") {
+      de = de.replace(/ .*/, '');
+      this.employeeLeavelist = this.filteredEmployeeLeaves.filter(res => {
+        const l: string = "" + res.leaveType;
         return res.leaveType.toString().toLowerCase().match(de.toString().toLowerCase());
       });
-    }else if(de === "0"){
+    } else if (de === "0") {
       this.ngOnInit();
     }
-   
+
   }
-  decision2(de:string){
-    console.log(de);
-    
-    if(de !== "0"){
-      this.employeeLeavelist = this.filteredEmployeeLeaves.filter( res=>{
-        if(res.id!==null){
-          console.log(de +" "+res.id.toString());
+  decision2(de: string) {
+    if (de !== "0") {
+      this.employeeLeavelist = this.filteredEmployeeLeaves.filter(res => {
+        if (res.id !== null) {
           return res.employeeId.toString().toLowerCase().match(de.toString().toLowerCase());
         }
 
       });
-    }else if(de === "0"){
+    } else if (de === "0") {
       this.ngOnInit();
     }
   }
 
-  decision3(emp:Iemployeeleave,de:string){
-    // this.action=de;
+  decision3(emp: Iemployeeleave, de: string) {
 
-    emp.status=de;
-    this.e=emp;
+    emp.status = de;
+    this.e = emp;
     this.employeeLeaveService.updateLeaveDecision(emp).subscribe(
       error => this.errorMessage = <any>error
     )
-    console.log(emp);
   }
 
 }

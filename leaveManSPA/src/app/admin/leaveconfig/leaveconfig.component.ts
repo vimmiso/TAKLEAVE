@@ -13,23 +13,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LeaveconfigComponent implements OnInit {
 
-  filteredLeaves:Ileave[];
-  leavelist:Ileave[] = [];
-  errorMessage:string;
+  filteredLeaves: Ileave[];
+  leavelist: Ileave[] = [];
+  errorMessage: string;
   empId;
- header:boolean=false;
- employee:IEmployee;
- filteredEmployee:IEmployee = {Name:"",Id:0,DOB:"",DOJ:"",Salary:0,Email:"",Role:"",TotalLeave:""};
-//  errorMessage:string;
- 
-//  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private route:ActivatedRoute) { }
+  header: boolean = false;
+  employee: IEmployee;
+  filteredEmployee: IEmployee = { Name: "", Id: 0, DOB: "", DOJ: "", Salary: 0, Email: "", Role: "", TotalLeave: "" };
 
-   
-  
-  constructor(private http:HttpClient,private leaveSerice:LeaveserviceService,private employeeService:EmployeeserviceService,private route:ActivatedRoute,private router:Router) { }
- 
+  constructor(private http: HttpClient, private leaveSerice: LeaveserviceService, private employeeService: EmployeeserviceService, private route: ActivatedRoute, private router: Router) { }
+
   ngOnInit(): void {
-    
+
     this.leaveSerice.getleaves().subscribe(
       leaves => {
         this.leavelist = leaves;
@@ -41,63 +36,53 @@ export class LeaveconfigComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.empId = +params.get('id');
-        console.log(this.empId);
       }
     );
-    console.log(this.empId);
-    if(this.empId){
-      this.header=true;
+    if (this.empId) {
+      this.header = true;
       this.employeeService.getemp(this.empId).subscribe(
         employee => {
-          console.log(employee);
           this.employee = employee;
           this.filteredEmployee = this.employee;
         },
         error => this.errorMessage = <any>error
       );
-    }else{
-      this.header=false;
+    } else {
+      this.header = false;
     }
-  
+
   }
 
-  refresh():void{
-    // window.location.reload();
-    // this.router.navigateByUrl("/leaveconfig/"+this.empId,{skipLocationChange:true}).then(()=>{
-    //   console.log(decodeURI(this.location.path()));
-    //   this.router.navigate([decodeURI(this.location.path())]);
-    // })
+  refresh(): void {
+
   }
 
-  delete(id:number){
+  delete(id: number) {
     this.leaveSerice.deleteLeave(id).subscribe(
       error => this.errorMessage = <any>error
     )
   }
 
-  
- onGetId():void{
-  
-  this.route.paramMap.subscribe(
-    params => {
-      this.empId = +params.get('id');
-      console.log(this.empId);
-    }
-  );
-  console.log(this.empId);
-  if(this.empId !== null){
-    this.header=true;
-    this.employeeService.getemp(this.empId).subscribe(
-      employee => {
-        console.log(employee);
-        this.employee = employee;
-        this.filteredEmployee = this.employee;
-      },
-      error => this.errorMessage = <any>error
+
+  onGetId(): void {
+
+    this.route.paramMap.subscribe(
+      params => {
+        this.empId = +params.get('id');
+      }
     );
-  }else{
-    this.header=false;
+    if (this.empId !== null) {
+      this.header = true;
+      this.employeeService.getemp(this.empId).subscribe(
+        employee => {
+          this.employee = employee;
+          this.filteredEmployee = this.employee;
+        },
+        error => this.errorMessage = <any>error
+      );
+    } else {
+      this.header = false;
+    }
   }
- }
 
 }

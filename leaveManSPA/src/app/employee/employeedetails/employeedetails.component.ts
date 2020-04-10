@@ -127,15 +127,12 @@ export class EmployeedetailsComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.empId = +params.get('id');
-        console.log(this.empId);
       }
     );
-    console.log(this.empId);
     if (this.empId) {
       this.header = true;
       this.employeeService.getemp(this.empId).subscribe(
         employee => {
-          console.log(employee);
           this.employee = employee;
           this.filteredEmployee = this.employee;
         },
@@ -174,7 +171,7 @@ export class EmployeedetailsComponent implements OnInit {
   onClick4(): void {
   }
 
- 
+
 
 
 

@@ -1,142 +1,127 @@
-<!-- <app-header></app-header> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="./assets/071.jpg" style="margin-top: 6%;" width="30" height="30"
-        class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
-      <b style="font-size: 32px;">TakLeave</b>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <ul class="nav nav-tabs ml-auto border-dark">
-      <li *ngIf="!header" class="nav-item ">
-        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"> <b>Home</b> </a>
-      </li>
-      <li *ngIf="header" class="nav-item ">
-        <a class="nav-link" ><b>Welcome</b></a>
-      </li>
-      <li *ngIf="!header" class="nav-item">
-        <a class="nav-link" [routerLink]="['/admins']" routerLinkActive="active"><b>Admin login</b></a>
-      </li>
-      <li *ngIf="!header" class="nav-item ">
-        <a class="nav-link" [routerLink]="['/employees']" routerLinkActive="active"><b>Employee login</b></a>
-      </li>
-      <li *ngIf="header" class="nav-item ">
-        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"><b>Log out</b></a>
-      </li>
-    </ul>
-  </nav>
+  <a class="navbar-brand" href="#">
+    <img src="./assets/071.jpg" style="margin-top: 6%;" width="30" height="30"
+      class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
+    <b style="font-size: 32px;">TakLeave</b>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <ul class="nav nav-tabs ml-auto border-dark">
+    <li *ngIf="!header" class="nav-item ">
+      <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"> <b>Home</b> </a>
+    </li>
+    <li *ngIf="header" class="nav-item ">
+      <a class="nav-link"><b>Welcome</b></a>
+    </li>
+    <li *ngIf="!header" class="nav-item">
+      <a class="nav-link" [routerLink]="['/admins']" routerLinkActive="active"><b>Admin login</b></a>
+    </li>
+    <li *ngIf="!header" class="nav-item ">
+      <a class="nav-link" [routerLink]="['/employees']" routerLinkActive="active"><b>Employee login</b></a>
+    </li>
+    <li *ngIf="header" class="nav-item ">
+      <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"><b>Log out</b></a>
+    </li>
+  </ul>
+</nav>
 
 
 <form>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <th>
-            <a [routerLink]="['/manageemp',empId]">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>
+          <a [routerLink]="['/manageemp',empId]">
             <button type="submit" class="btn btn-success mr-3">Employee</button>
-            </a>
-            <a [routerLink]="['/leaveconfig',empId]">
+          </a>
+          <a [routerLink]="['/leaveconfig',empId]">
             <button type="submit" class="btn btn-success mr-3">Leave Configuration</button>
-            </a>
-            <a [routerLink]="['/leavelist',empId]">
+          </a>
+          <a [routerLink]="['/leavelist',empId]">
             <button type="submit" class="btn btn-success mr-3 shadow rounded border border-dark">Leave List</button>
-            </a>
+          </a>
         </th>
+      </thead>
+    </table>
+  </div>
+</form>
+<div class="card">
+  <div class="card-header" style="font-size: 28px;">
+    <h4>Leave List</h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2" style="text-align: center;">
+        <h6>Filter by:</h6>
+      </div>
+      <div class="form-group mr-3">
+        <select class="form-control form-control-sm" id="action" (change)="decision1($event.target.value)">
+          <option value="0" default>Leave Type</option>
+          <option *ngFor='let leave of leaveList' value={{leave.name}}>{{leave.name}}</option>
+        </select>
+      </div>
+      <div class="form-group mr-3">
+        <select class="form-control form-control-sm" id="action" (change)="decision2($event.target.value)">
+          <option value="0">Employee Name</option>
+          <option *ngFor='let emp of employeelist' value={{emp.id}}>{{emp.name}}</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-outline-dark form-control-sm">Search</button>
+    </div>
+    <div class="row">
+      <div class="col-md-6" style="margin-bottom: 2%;">
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover shadow p-3 mb-5 bg-white rounded">
+        <thead>
+          <tr style="background-color: lightblue;">
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Leave</th>
+            <th>Leave Type</th>
+            <th>Number of Days</th>
+            <th>Status</th>
+            <th>Actions</th>
+
+          </tr>
         </thead>
+        <tbody>
+          <ng-container *ngFor='let emp of employeelist'>
+
+
+
+            <tr *ngFor='let employeeleave of employeeLeavelist'>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{emp.name}}</th>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.startDate}}</th>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.endDate}}</th>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{emp.totalLeave}}</th>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.leaveType}}</th>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.noofDays}}</th>
+              <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.status}}</th>
+
+              <th *ngIf="emp.id === employeeleave.employeeId">
+                <div class="form-group">
+                  <select class="form-control form-control-sm" id="action"
+                    (change)="decision3(employeeleave,$event.target.value)" name="action">
+                    <option>Select Action</option>
+                    <option value="Approve">Approve</option>
+                    <option value="Reject">Reject</option>
+
+                  </select>
+                </div>
+              </th>
+            </tr>
+
+          </ng-container>
+        </tbody>
       </table>
     </div>
-  </form>
-<div class="card">
-    <div class="card-header" style="font-size: 28px;">
-        <h4>Leave List</h4>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-2" style="text-align: center;"><h6>Filter by:</h6></div>
-            <!-- <div class="col-md-4" >
-                <input type="text"  placeholder="Employee Name" class="form-control"/>
-            </div> -->
-            <div class="form-group mr-3">
-                <select class="form-control form-control-sm" id="action" (change)="decision1($event.target.value)">
-                    <option value="0" default>Leave Type</option>
-                    <option *ngFor='let leave of leaveList' value={{leave.name}}>{{leave.name}}</option>
-                    <!-- <option>Approve</option>
-                    <option>Reject</option> -->
-                
-                </select>
-            </div>
-            <div class="form-group mr-3">
-                <select class="form-control form-control-sm" id="action"  (change)="decision2($event.target.value)">
-                    <option value="0">Employee Name</option>
-                    <option *ngFor='let emp of employeelist' value={{emp.id}}>{{emp.name}}</option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-outline-dark form-control-sm">Search</button>
-            <!-- <div class="btn-group float-right" style="position: absolute; margin-left: 88%;">
-                <button type="submit" class="btn btn-secondary form-control mr-3">+Add New</button>
-            </div> -->
-        </div>
-        <div class="row">
-            <div class="col-md-6" style="margin-bottom: 2%;">
-                <!-- <h4 >Filtered by: </h4> -->
-            </div>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover shadow p-3 mb-5 bg-white rounded">
-                <thead>
-                    <tr style="background-color: lightblue;">
-                        <!-- <th>
-                            <button class="btn btn-primary">
-                                Show Image
-                            </button>
-                        </th> -->
-                        <th>Employee Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Leave</th>
-                        <th>Leave Type</th>
-                        <th>Number of Days</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor='let emp of employeelist'>
-                    
-
-                        
-                        <tr *ngFor='let employeeleave of employeeLeavelist'>
-                            <!-- <tr > -->
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{emp.name}}</th>    
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.startDate}}</th>
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.endDate}}</th>
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{emp.totalLeave}}</th>
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.leaveType}}</th>
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.noofDays}}</th>
-                            <th *ngIf="emp.id === employeeleave.employeeId">{{employeeleave.status}}</th>                            
-                            
-                            <th *ngIf="emp.id === employeeleave.employeeId">
-                                <div class="form-group">
-                                    <select class="form-control form-control-sm" id="action" (change)="decision3(employeeleave,$event.target.value)" name="action">
-                                        <option >Select Action</option>
-                                        <option value="Approve">Approve</option>
-                                        <option value="Reject">Reject</option>
-                                    
-                                    </select>
-                                </div>
-                            </th> 
-                            <!-- </tr>                        -->
-                        </tr>
-                      
-                    </ng-container>
-                </tbody>
-            </table>
-        </div>
-    </div>
+  </div>
 </div>
 <div class="footer">
   <p>Note: If updated value is not appeared then please referesh the page.</p>

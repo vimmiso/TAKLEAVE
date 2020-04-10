@@ -51,15 +51,12 @@ export class ManageEmployeeComponent implements OnInit {
    this.route.paramMap.subscribe(
     params => {
       this.empId = +params.get('id');
-      console.log(this.empId);
     }
   );
-  console.log(this.empId);
   if(this.empId){
     this.header=true;
     this.employeeService.getemp(this.empId).subscribe(
       employee => {
-        console.log(employee);
         this.employee = employee;
         this.filteredEmployee = this.employee;
       },
@@ -68,14 +65,12 @@ export class ManageEmployeeComponent implements OnInit {
   }else{
     this.header=false;
   }
-  // this.reloadComponent();
 
  }
 
  Search(){
    if(this.listFilter !== ""){
     this.employeelist2 = this.employeelist2.filter(res=>{
-      console.log(res);
       if(res.name !== null){
         return res.name.toString().toLowerCase().match(this.listFilter.toString().toLowerCase());
       }
@@ -107,15 +102,12 @@ export class ManageEmployeeComponent implements OnInit {
   this.route.paramMap.subscribe(
     params => {
       this.empId = +params.get('id');
-      console.log(this.empId);
     }
   );
-  console.log(this.empId);
   if(this.empId !== null){
     this.header=true;
     this.employeeService.getemp(this.empId).subscribe(
       employee => {
-        console.log(employee);
         this.employee = employee;
         this.filteredEmployee = this.employee;
       },
